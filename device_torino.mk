@@ -19,19 +19,18 @@ $(call inherit-product, vendor/samsung/torino/vendor.mk)
 # Add device package overlay
 DEVICE_PACKAGE_OVERLAYS += device/samsung/torino/overlay
 
+# Init files
+PRODUCT_COPY_FILES += \
+    device/samsung/torino/ramdisk/init.gt-s6102board.sensors.rc:root/init.gt-s6102board.sensors.rc
+
+# Enable repeatable keys in CWM
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.cwm.enable_key_repeat=true \
+    ro.cwm.repeatable_keys=114,115
+
 # Add LDPI assets, in addition to MDPI
 PRODUCT_AAPT_PREF_CONFIG := ldpi mdpi
 
 ## LDPI assets
 PRODUCT_AAPT_CONFIG := normal mdpi ldpi
 PRODUCT_AAPT_PREF_CONFIG :=ldpi
-
-# Prebuilt Kernel - DELETE from the package
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-    LOCAL_KERNEL := device/samsung/torino/prebuilt/kernel
-else
-    LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel

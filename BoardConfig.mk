@@ -26,27 +26,18 @@ include device/samsung/bcm21553-common/BoardConfigCommon.mk
 TARGET_BOARD_PLATFORM 				:= bcm21553
 TARGET_BOOTLOADER_BOARD_NAME 			:= torino
 
+# Kernel source
+TARGET_KERNEL_CUSTOM_TOOLCHAIN			:= arm-eabi-4.4.3
+TARGET_KERNEL_SOURCE				:= kernel/samsung/bcm21553-common
+
 # Recovery
-BOARD_BML_RECOVERY				:= /dev/block/bml8
-TARGET_USERIMAGES_USE_EXT4			:= true
-BOARD_RECOVERY_HANDLES_MOUNT			:= true
-BOARD_HAS_DOWNLOAD_MODE				:= true
 BOARD_BOOTIMAGE_PARTITION_SIZE			:= 7357568
 BOARD_RECOVERYIMAGE_PARTITION_SIZE		:= 7357568
 BOARD_SYSTEMIMAGE_PARTITION_SIZE		:= 241172480
 BOARD_USERDATAIMAGE_PARTITION_SIZE		:= 206831616
-BOARD_FLASH_BLOCK_SIZE				:= 131072
 BOARD_LDPI_RECOVERY				:= true
+BOARD_USE_CUSTOM_RECOVERY_FONT			:= "<font_7x16.h>"
+TARGET_RECOVERY_LCD_BACKLIGHT_PATH		:= \"/sys/class/backlight/sec-backlight/brightness\"
 
-TARGET_RECOVERY_FSTAB				:= device/samsung/torino/recovery/recovery.fstab
-
-# Prebuilt kernel NOTE: Delete from package
-TARGET_PREBUILT_KERNEL				:= device/samsung/torino/prebuilt/kernel
-#TARGET_KERNEL_CONFIG := cyanogenmod_torino_defconfig
-
-# Kernel defines
-BOARD_NAND_PAGE_SIZE				:= 4096 -s 128
-BOARD_KERNEL_BASE				:= 0x81600000
-BOARD_KERNEL_PAGESIZE				:= 4096
-BOARD_PAGE_SIZE					:= 0x00001000
-BOARD_KERNEL_CMDLINE				:= 
+# Kernel config
+TARGET_KERNEL_CONFIG				:= cm9_torino_defconfig
